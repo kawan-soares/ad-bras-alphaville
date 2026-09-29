@@ -192,6 +192,7 @@ body.menu-open{overflow:hidden}
 .hero-times{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;margin-top:6px;width:min(100%,460px)}
 .hero-time{display:grid;gap:4px;padding:2px 12px}
 .hero-time+.hero-time{border-left:1px solid rgba(201,171,116,.45)}
+@media (min-width:561px){.hero-times{margin-top:10px;margin-bottom:22px}.hero{padding-bottom:150px}}
 @media (max-width:560px){.hero-times{width:100%;max-width:360px;gap:0}.hero-time{padding:2px 6px}.hero-time small{font-size:.72rem}.hero-time span{font-size:1.5rem}}
 .hero-time b{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .hero-time span{font-family:var(--serif);font-size:1.6rem;color:var(--white);line-height:1.1;font-variant-numeric:tabular-nums}
@@ -312,14 +313,7 @@ section{scroll-margin-top:60px}
 .g-ph svg{width:38px;height:38px}
 .g-item figcaption{position:absolute;left:18px;bottom:16px;right:18px;z-index:1;color:var(--white);font-size:.7rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase}
 @media (max-width:900px){.gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}}
-@media (max-width:560px){
-  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px}
-  .gallery::-webkit-scrollbar{display:none}
-  .g-item,.g-item.wide,.g-item.tall{flex:0 0 80%;height:240px;scroll-snap-align:start;border-radius:14px}
-  .g-item figcaption{left:14px;bottom:12px;font-size:.64rem}
-  p.gallery-swipe{display:flex}
-}
-.gallery-swipe{display:none;align-items:center;gap:8px;margin-top:14px;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft)}
+@media (max-width:560px){.gallery{gap:10px;grid-auto-rows:140px}.g-item{border-radius:12px}.g-item figcaption{left:12px;bottom:10px;font-size:.62rem}}
 
 /* Convite */
 .invite{background:var(--navy-950);color:var(--white);text-align:center;position:relative;overflow:hidden}
@@ -637,7 +631,7 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
       </div>
       <p class="lead" style="max-width:40ch">Um ambiente preparado com carinho para receber você e sua família.</p>
     </div>
-    <div class="gallery reveal d1" tabindex="0" aria-label="Fotos da igreja">
+    <div class="gallery reveal d1">
       <figure class="g-item wide tall" style="--ph:url('images/galeria-1.jpg')"><div class="g-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg></div><figcaption>Nossa igreja</figcaption></figure>
       <figure class="g-item " style="--ph:url('images/galeria-2.jpg')"><div class="g-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg></div><figcaption>Fachada</figcaption></figure>
       <figure class="g-item " style="--ph:url('images/galeria-3.jpg')"><div class="g-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg></div><figcaption>Nave principal</figcaption></figure>
@@ -647,7 +641,6 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
       <figure class="g-item " style="--ph:url('images/galeria-7.jpg')"><div class="g-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg></div><figcaption>Espaço de comunhão</figcaption></figure>
       <figure class="g-item " style="--ph:url('images/galeria-8.jpg')"><div class="g-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M4 8h3l1.5-2h7L17 8h3v11H4z"/><circle cx="12" cy="13.5" r="3.5"/></svg></div><figcaption>Área externa</figcaption></figure>
     </div>
-    <p class="gallery-swipe" aria-hidden="true">Arraste para o lado →</p>
   </div>
 </section>
 
