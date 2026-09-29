@@ -189,11 +189,12 @@ body.menu-open{overflow:hidden}
 .verses.back .verse.out{transform:translateX(40px)}
 
 /* Horários no topo */
-.hero-times{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;margin-top:6px;width:min(100%,480px)}
-.hero-time{display:grid;gap:2px;padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.06);border:0;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
-@media (max-width:560px){.hero-times{width:100%;max-width:360px;gap:8px}.hero-time{padding:10px 6px}.hero-time small{font-size:.66rem}.hero-time span{font-size:1.2rem}}
+.hero-times{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:0;margin-top:6px;width:min(100%,460px)}
+.hero-time{display:grid;gap:4px;padding:2px 12px}
+.hero-time+.hero-time{border-left:1px solid rgba(201,171,116,.45)}
+@media (max-width:560px){.hero-times{width:100%;max-width:360px;gap:0}.hero-time{padding:2px 6px}.hero-time small{font-size:.72rem}.hero-time span{font-size:1.5rem}}
 .hero-time b{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
-.hero-time span{font-family:var(--serif);font-size:1.35rem;color:var(--white);line-height:1.1;font-variant-numeric:tabular-nums}
+.hero-time span{font-family:var(--serif);font-size:1.6rem;color:var(--white);line-height:1.1;font-variant-numeric:tabular-nums}
 .hero-time small{font-size:.74rem;color:rgba(255,255,255,.7)}
 .hero-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:8px}
 .scroll-cue{
@@ -497,14 +498,14 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
       <!-- Os versículos ficam no CONFIG (lá embaixo, no script). Este é o que aparece se o JavaScript não carregar. -->
       <blockquote class="hero-quote verse on">“Alegrei-me quando me disseram: Vamos à casa do Senhor.”<cite>Salmos 122:1</cite></blockquote>
     </div>
+    <!-- Horários de culto: preenchidos pelo CONFIG (ficam ocultos enquanto vazios) -->
+    <div class="hero-times" id="heroTimes" hidden></div>
     <div class="hero-actions">
       <a href="#sobre" class="btn btn-gold">Conheça nossa igreja</a>
       <a href="#localizacao" class="btn btn-ghost">Como chegar
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
     </div>
-    <!-- Horários de culto: preenchidos pelo CONFIG (ficam ocultos enquanto vazios) -->
-    <div class="hero-times" id="heroTimes" hidden></div>
   </div>
   <a href="#sobre" class="scroll-cue" aria-label="Ir para a próxima seção">Deslize<b></b></a>
 </section>
