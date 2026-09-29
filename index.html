@@ -187,22 +187,10 @@ body.menu-open{overflow:hidden}
 .verse.on,.verses.back .verse.on{opacity:1;transform:none}
 .verse.out{opacity:0;transform:translateX(-40px)}
 .verses.back .verse.out{transform:translateX(40px)}
-.verse-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:-10px}
-.verse-arrow{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:rgba(255,255,255,.7);transition:color .3s, background .3s}
-.verse-arrow:hover{color:var(--gold-soft);background:rgba(255,255,255,.06)}
-.verse-arrow svg{width:18px;height:18px}
-.verse-arrow:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.verse-dots{display:flex;gap:2px;justify-content:center}
-.verse-dots button{all:unset;cursor:pointer;width:18px;height:32px;display:grid;place-items:center}
-.verse-dots button::after{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .4s, width .4s var(--ease)}
-.verse-dots button[aria-selected="true"]{width:30px}
-.verse-dots button[aria-selected="true"]::after{background:var(--gold);width:22px;border-radius:4px}
-.verse-dots button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:6px}
-@media (max-width:560px){.verse-dots button{width:14px}.verse-dots button[aria-selected="true"]{width:28px}}
 
 /* Horários no topo */
 .hero-times{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:10px;margin-top:6px;width:min(100%,480px)}
-.hero-time{display:grid;gap:2px;padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(201,171,116,.3);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.hero-time{display:grid;gap:2px;padding:12px 10px;border-radius:14px;background:rgba(255,255,255,.06);border:0;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 @media (max-width:560px){.hero-times{width:100%;max-width:360px;gap:8px}.hero-time{padding:10px 6px}.hero-time small{font-size:.66rem}.hero-time span{font-size:1.2rem}}
 .hero-time b{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700}
 .hero-time span{font-family:var(--serif);font-size:1.35rem;color:var(--white);line-height:1.1;font-variant-numeric:tabular-nums}
@@ -508,11 +496,6 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
     <div class="verses" id="verses" aria-live="polite">
       <!-- Os versículos ficam no CONFIG (lá embaixo, no script). Este é o que aparece se o JavaScript não carregar. -->
       <blockquote class="hero-quote verse on">“Alegrei-me quando me disseram: Vamos à casa do Senhor.”<cite>Salmos 122:1</cite></blockquote>
-    </div>
-    <div class="verse-nav">
-      <button class="verse-arrow" id="versePrev" type="button" aria-label="Versículo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg></button>
-      <div class="verse-dots" id="verseDots" role="tablist" aria-label="Escolher versículo"></div>
-      <button class="verse-arrow" id="verseNext" type="button" aria-label="Próximo versículo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg></button>
     </div>
     <div class="hero-actions">
       <a href="#sobre" class="btn btn-gold">Conheça nossa igreja</a>
@@ -827,28 +810,22 @@ const CONFIG = {
   /* Versículos rotativos */
   (function(){
     const V = CONFIG.versiculos || []; if (V.length < 2) return;
-    const box = $('#verses'), dots = $('#verseDots');
+    const box = $('#verses');
     box.innerHTML = V.map((v,i) => `<blockquote class="hero-quote verse${i ? '' : ' on'}" aria-hidden="${i ? 'true' : 'false'}">“${v.texto}”<cite>${v.ref}</cite></blockquote>`).join('');
-    dots.innerHTML = V.map((v,i) => `<button type="button" role="tab" aria-label="Versículo ${i+1}: ${v.ref}" aria-selected="${i === 0}"></button>`).join('');
-    const items = box.children, btns = dots.children;
+    const items = box.children;
     let cur = 0, timer;
     const show = (n, back) => {
       if (n === cur) return;
       box.classList.toggle('back', back === undefined ? n < cur : back);
       items[cur].classList.remove('on'); items[cur].classList.add('out'); items[cur].setAttribute('aria-hidden','true');
       const prev = items[cur]; setTimeout(() => prev.classList.remove('out'), 900);
-      btns[cur].setAttribute('aria-selected','false');
       cur = n;
       items[cur].classList.add('on'); items[cur].setAttribute('aria-hidden','false');
-      btns[cur].setAttribute('aria-selected','true');
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show((cur + 1) % V.length, false), (CONFIG.tempoVersiculo || 7) * 1000); };
     const next = () => { show((cur + 1) % V.length, false); start(); };
     const prev = () => { show((cur - 1 + V.length) % V.length, true); start(); };
-    [...btns].forEach((b,i) => b.addEventListener('click', () => { show(i); start(); }));
-    $('#verseNext').addEventListener('click', next);
-    $('#versePrev').addEventListener('click', prev);
     /* Deslizar com o dedo (ou arrastar com o mouse) */
     let x0 = null, y0 = null;
     box.addEventListener('pointerdown', e => { x0 = e.clientX; y0 = e.clientY; });
