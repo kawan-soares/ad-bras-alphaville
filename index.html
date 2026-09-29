@@ -180,13 +180,25 @@ body.menu-open{overflow:hidden}
 .hero-quote cite{display:block;margin-top:10px;font-family:var(--sans);font-style:normal;font-size:.7rem;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
 /* Versículos rotativos */
 .verses{display:grid;justify-items:center;align-items:center;max-width:42ch}
-.verse{grid-area:1/1;align-self:center;opacity:0;transform:translateY(14px);transition:opacity .9s var(--ease), transform .9s var(--ease);pointer-events:none}
-.verse.on{opacity:1;transform:none;pointer-events:auto}
-.verse.out{opacity:0;transform:translateY(-14px)}
-.verse-dots{display:flex;gap:8px;justify-content:center;margin-top:-6px}
-.verse-dots button{all:unset;cursor:pointer;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .4s, width .4s var(--ease)}
-.verse-dots button[aria-selected="true"]{background:var(--gold);width:22px;border-radius:4px}
-.verse-dots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.verses{touch-action:pan-y;cursor:grab;user-select:none;-webkit-user-select:none}
+.verses:active{cursor:grabbing}
+.verse{grid-area:1/1;align-self:center;opacity:0;transform:translateX(40px);transition:opacity .7s var(--ease), transform .7s var(--ease);pointer-events:none}
+.verses.back .verse{transform:translateX(-40px)}
+.verse.on,.verses.back .verse.on{opacity:1;transform:none}
+.verse.out{opacity:0;transform:translateX(-40px)}
+.verses.back .verse.out{transform:translateX(40px)}
+.verse-nav{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:-10px}
+.verse-arrow{all:unset;cursor:pointer;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:rgba(255,255,255,.7);transition:color .3s, background .3s}
+.verse-arrow:hover{color:var(--gold-soft);background:rgba(255,255,255,.06)}
+.verse-arrow svg{width:18px;height:18px}
+.verse-arrow:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.verse-dots{display:flex;gap:2px;justify-content:center}
+.verse-dots button{all:unset;cursor:pointer;width:18px;height:32px;display:grid;place-items:center}
+.verse-dots button::after{content:"";width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.28);transition:background .4s, width .4s var(--ease)}
+.verse-dots button[aria-selected="true"]{width:30px}
+.verse-dots button[aria-selected="true"]::after{background:var(--gold);width:22px;border-radius:4px}
+.verse-dots button:focus-visible{outline:2px solid var(--gold);outline-offset:-4px;border-radius:6px}
+@media (max-width:560px){.verse-dots button{width:14px}.verse-dots button[aria-selected="true"]{width:28px}}
 
 /* Horários no topo */
 .hero-times{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:6px}
@@ -496,7 +508,11 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
       <!-- Os versículos ficam no CONFIG (lá embaixo, no script). Este é o que aparece se o JavaScript não carregar. -->
       <blockquote class="hero-quote verse on">“Alegrei-me quando me disseram: Vamos à casa do Senhor.”<cite>Salmos 122:1</cite></blockquote>
     </div>
-    <div class="verse-dots" id="verseDots" role="tablist" aria-label="Escolher versículo"></div>
+    <div class="verse-nav">
+      <button class="verse-arrow" id="versePrev" type="button" aria-label="Versículo anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M15 6l-6 6 6 6"/></svg></button>
+      <div class="verse-dots" id="verseDots" role="tablist" aria-label="Escolher versículo"></div>
+      <button class="verse-arrow" id="verseNext" type="button" aria-label="Próximo versículo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 6l6 6-6 6"/></svg></button>
+    </div>
     <div class="hero-actions">
       <a href="#sobre" class="btn btn-gold">Conheça nossa igreja</a>
       <a href="#localizacao" class="btn btn-ghost">Como chegar
@@ -813,8 +829,9 @@ const CONFIG = {
     dots.innerHTML = V.map((v,i) => `<button type="button" role="tab" aria-label="Versículo ${i+1}: ${v.ref}" aria-selected="${i === 0}"></button>`).join('');
     const items = box.children, btns = dots.children;
     let cur = 0, timer;
-    const show = n => {
+    const show = (n, back) => {
       if (n === cur) return;
+      box.classList.toggle('back', back === undefined ? n < cur : back);
       items[cur].classList.remove('on'); items[cur].classList.add('out'); items[cur].setAttribute('aria-hidden','true');
       const prev = items[cur]; setTimeout(() => prev.classList.remove('out'), 900);
       btns[cur].setAttribute('aria-selected','false');
@@ -823,8 +840,26 @@ const CONFIG = {
       btns[cur].setAttribute('aria-selected','true');
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show((cur + 1) % V.length), (CONFIG.tempoVersiculo || 7) * 1000); };
+    const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show((cur + 1) % V.length, false), (CONFIG.tempoVersiculo || 7) * 1000); };
+    const next = () => { show((cur + 1) % V.length, false); start(); };
+    const prev = () => { show((cur - 1 + V.length) % V.length, true); start(); };
     [...btns].forEach((b,i) => b.addEventListener('click', () => { show(i); start(); }));
+    $('#verseNext').addEventListener('click', next);
+    $('#versePrev').addEventListener('click', prev);
+    /* Deslizar com o dedo (ou arrastar com o mouse) */
+    let x0 = null, y0 = null;
+    box.addEventListener('pointerdown', e => { x0 = e.clientX; y0 = e.clientY; });
+    box.addEventListener('pointerup', e => {
+      if (x0 === null) return;
+      const dx = e.clientX - x0, dy = e.clientY - y0; x0 = null;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) (dx < 0 ? next : prev)();
+    });
+    box.addEventListener('pointercancel', () => { x0 = null; });
+    document.addEventListener('keydown', e => {
+      if (document.activeElement && /INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+      if (window.scrollY > innerHeight * .6) return;
+      if (e.key === 'ArrowRight') next(); else if (e.key === 'ArrowLeft') prev();
+    });
     box.addEventListener('mouseenter', () => clearInterval(timer));
     box.addEventListener('mouseleave', start);
     document.addEventListener('visibilitychange', () => document.hidden ? clearInterval(timer) : start());
