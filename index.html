@@ -974,11 +974,6 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
   <button class="a11y-reset" type="button" id="a11yReset">Voltar ao padrão</button>
 </div>
 
-<!-- VLibras: tradução para Libras (ferramenta oficial e gratuita do Governo Federal) -->
-<div vw class="enabled">
-  <div vw-access-button class="active"></div>
-  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
-</div>
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
@@ -1141,9 +1136,14 @@ const CONFIG = {
             Nome: f.nome.value.trim() || 'Não informado', Contato: f.contato.value.trim() || 'Não informado', Pedido: pedido })
         });
         const d = await r.json().catch(() => ({}));
-        if (!r.ok || d.success === 'false' || d.success === false) throw new Error();
+        if (/activat/i.test(d.message || '')) {
+          show('Formulário ainda não ativado: confira o e-mail ' + CONFIG.emailPedidos + ' (e o spam) e clique em "Activate Form". Depois envie de novo.', false);
+          return;
+        }
+        if (!r.ok || d.success === 'false' || d.success === false) throw new Error(d.message || ('HTTP ' + r.status));
         f.reset(); show('Recebemos seu pedido. Nossos pastores vão orar por você. Deus abençoe!', true);
       } catch (err) {
+        console.warn('Pedido de oração:', err);
         show('Não foi possível enviar agora. Tente de novo em instantes ou mande pelo e-mail ' + CONFIG.emailPedidos + '.', false);
       } finally { btn.disabled = false; btn.textContent = 'Enviar pedido'; }
     });
@@ -1316,8 +1316,6 @@ const CONFIG = {
 })();
 </script>
 
-<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
-<script>try { new window.VLibras.Widget('https://vlibras.gov.br/app'); } catch (e) {}</script>
 <script>
 /* Acessibilidade: tamanho do texto, alto contraste e parar animações (fica salvo no aparelho) */
 (function(){
