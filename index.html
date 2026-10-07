@@ -428,6 +428,9 @@ html.a11y-hc .a11y-panel,html.a11y-hc .a11y-panel *{background:#000!important;co
 .a11y-opt[aria-pressed="true"]{background:var(--gold);color:var(--navy-950);border-color:var(--gold)}
 .a11y-opt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .a11y-toggle{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.vl-close{position:fixed;right:16px;top:calc(16px + env(safe-area-inset-top,0px));z-index:2147483647;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:0;background:#003f86;color:#fff;font:700 .8rem/1 var(--sans);box-shadow:0 8px 20px rgba(0,0,0,.35);cursor:pointer}
+.vl-close svg{width:16px;height:16px}
+.vl-close:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .a11y-reset{all:unset;cursor:pointer;font-size:.78rem;color:var(--gold-soft);text-decoration:underline;justify-self:start}
 
 /* Primeira visita */
@@ -975,6 +978,17 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
 </div>
 
 
+<!-- VLibras: tradução para Libras (ferramenta oficial e gratuita do Governo Federal) -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+</div>
+<!-- Botão extra para fechar o VLibras (no celular o "X" dele fica escondido) -->
+<button class="vl-close" id="vlClose" type="button" aria-label="Fechar tradutor de Libras" hidden>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+  <span>Fechar Libras</span>
+</button>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -1338,6 +1352,31 @@ const CONFIG = {
   document.getElementById('a11yCalm').addEventListener('click', () => { st.calm = !st.calm; apply(); });
   document.getElementById('a11yReset').addEventListener('click', () => { st = { size: 0, hc: false, calm: false }; apply(); });
   apply();
+})();
+</script>
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>
+try { new window.VLibras.Widget('https://vlibras.gov.br/app'); } catch (e) {}
+/* Mostra o botão "Fechar Libras" sempre que o VLibras estiver aberto */
+(function(){
+  const btn = document.getElementById('vlClose');
+  const wrap = () => document.querySelector('[vw-plugin-wrapper]');
+  const isOpen = () => { const w = wrap(); return !!(w && w.classList.contains('active')); };
+  const sync = () => { btn.hidden = !isOpen(); };
+  const w = wrap();
+  if (w) new MutationObserver(sync).observe(w, { attributes: true, attributeFilter: ['class'] });
+  btn.addEventListener('click', () => {
+    const w = wrap(); if (!w) return;
+    const x = w.querySelector('.vpw-settings-btn-close, [class*="btn-close"], [class*="close"]');
+    if (x) x.click();
+    setTimeout(() => {
+      if (isOpen()) {
+        w.classList.remove('active');
+        const a = document.querySelector('[vw-access-button]'); if (a) a.classList.add('active');
+      }
+      sync();
+    }, 150);
+  });
 })();
 </script>
 </body>
