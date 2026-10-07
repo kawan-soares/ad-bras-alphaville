@@ -407,13 +407,23 @@ body.poster-open{overflow:hidden}
 html.a11y-t1{font-size:112.5%}
 html.a11y-t2{font-size:125%}
 html.a11y-calm *,html.a11y-calm *::before,html.a11y-calm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
-html.a11y-hc .hero-bg,html.a11y-hc .hero::before,html.a11y-hc .leaders::before,html.a11y-hc .invite::before,html.a11y-hc .prayer::before{display:none!important}
-html.a11y-hc body,html.a11y-hc section,html.a11y-hc footer,html.a11y-hc .header,html.a11y-hc .notice,html.a11y-hc .drawer-panel,html.a11y-hc .event,html.a11y-hc .pillar,html.a11y-hc .channel,html.a11y-hc .pform,html.a11y-hc .pform input,html.a11y-hc .pform textarea{background:#000!important;color:#fff!important;border-color:#fff!important}
-html.a11y-hc *{color:#fff!important;text-shadow:none!important}
-html.a11y-hc .eyebrow,html.a11y-hc .role,html.a11y-hc a,html.a11y-hc em,html.a11y-hc cite,html.a11y-hc .hero-time b,html.a11y-hc .event-meta{color:#ffe600!important}
-html.a11y-hc .btn,html.a11y-hc .btn *{background:#ffe600!important;color:#000!important;border:2px solid #ffe600!important}
-html.a11y-hc .btn-ghost,html.a11y-hc .btn-ghost *,html.a11y-hc .copy-btn{background:#000!important;color:#ffe600!important}
-html.a11y-hc .a11y-panel,html.a11y-hc .a11y-panel *{background:#000!important;color:#fff!important;border-color:#fff!important}
+/* Alto contraste com a identidade do site: mesmo azul e dourado, só que mais fortes */
+html.a11y-hc{--ink:#02060f;--ink-soft:#1a2433;--line-light:#9c8a66;--paper:#ffffff;--ivory:#f7f4ec;--gold:#f2d9a0;--gold-soft:#fbe9c2;--navy-900:#020b1a;--navy-950:#010610}
+/* seções claras: textos mais escuros e dourado escurecido para dar contraste */
+html.a11y-hc .light .eyebrow,html.a11y-hc .ivory .eyebrow,html.a11y-hc .name-row .role,html.a11y-hc .event-meta,html.a11y-hc .address .label,html.a11y-hc .events-label,html.a11y-hc .ch-text b,html.a11y-hc .pillars-hint{color:#6a4c12!important}
+html.a11y-hc .name-row .aka,html.a11y-hc .about-verse{color:#5a3f0c!important}
+html.a11y-hc .lead,html.a11y-hc .pillar p,html.a11y-hc .visit-item p,html.a11y-hc .event p,html.a11y-hc .event-local,html.a11y-hc .bio{color:var(--ink-soft)!important}
+html.a11y-hc .pillar,html.a11y-hc .event,html.a11y-hc .channel,html.a11y-hc .map{border-color:#9c8a66!important}
+html.a11y-hc .pillar:not(.open) .pillar-plus::before,html.a11y-hc .pillar:not(.open) .pillar-plus::after{background:#6a4c12!important}
+html.a11y-hc .pillar:not(.open) .pillar-icon,html.a11y-hc .pillar:not(.open) .pillar-plus{border-color:#6a4c12!important}
+html.a11y-hc .light .eyebrow::before{background:#6a4c12}
+/* seções escuras: textos brancos puros */
+html.a11y-hc .hero::before{background:linear-gradient(180deg,rgba(1,6,16,.82),rgba(1,6,16,.78))!important}
+html.a11y-hc .hero-quote,html.a11y-hc .hero-sub,html.a11y-hc .hero-time small,html.a11y-hc .dark .lead,html.a11y-hc .bio-dark,html.a11y-hc .invite p,html.a11y-hc .prayer .lead,html.a11y-hc .pform-note,html.a11y-hc .footer,html.a11y-hc .foot-bottom,html.a11y-hc .menu a,html.a11y-hc .pillar.open .pillar-text,html.a11y-hc .drawer-foot{color:#fff!important}
+html.a11y-hc .pform input,html.a11y-hc .pform textarea{background:#010610!important;border-color:#c9b48a!important}
+html.a11y-hc .pform input::placeholder,html.a11y-hc .pform textarea::placeholder{color:rgba(255,255,255,.7)!important}
+html.a11y-hc .btn-ghost{border-color:#fff!important}
+html.a11y-hc a:focus-visible,html.a11y-hc button:focus-visible{outline:3px solid #fbe9c2!important;outline-offset:3px}
 
 .a11y-btn{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:52px;height:52px;border-radius:50%;border:2px solid rgba(201,171,116,.7);background:var(--navy-900);color:var(--gold-soft);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
 .a11y-btn:hover{transform:scale(1.06)}
@@ -1006,7 +1016,7 @@ const CONFIG = {
   instagram: "https://www.instagram.com/adbrasitapevisantanaalphaville",
   instagramUser: "@adbrasitapevisantanaalphaville",
   email:     "adbrassantanaalphaville@gmail.com",
-  emailPedidos: "kakafersoa@gmail.com",   // TESTE: trocar de volta para "adbrassantanaalphaville@gmail.com"
+  emailPedidos: "adbrassantanaalphaville@gmail.com",   // onde chegam os pedidos de oração
   facebook:  "",   // ex: "https://facebook.com/suaigreja"
   youtube:   "",   // ex: "https://youtube.com/@suaigreja"
   whatsapp:  "",   // só números com DDI+DDD, ex: "5511999999999"
