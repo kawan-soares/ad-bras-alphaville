@@ -426,6 +426,32 @@ body.poster-open{overflow:hidden}
 .schedule-item b{font-weight:600}
 .schedule-item span{color:var(--ink-soft);font-variant-numeric:tabular-nums}
 
+/* Pedido de oração */
+.prayer{background:var(--navy-900);color:var(--white);position:relative;overflow:hidden}
+.prayer::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 100% 0%, rgba(90,143,199,.16), transparent 70%);pointer-events:none}
+.prayer .wrap{position:relative;display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(36px,6vw,80px);align-items:start}
+.prayer .section-head h2{color:var(--white)}
+.prayer .lead{color:rgba(255,255,255,.72)}
+.prayer-verse{margin-top:26px;font-family:var(--serif);font-style:italic;font-size:1.3rem;line-height:1.5;color:var(--gold-soft);padding-left:20px;border-left:1px solid var(--gold)}
+.prayer-verse cite{display:block;margin-top:8px;font-family:var(--sans);font-style:normal;font-size:.66rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.pform{display:grid;gap:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:clamp(22px,4vw,34px)}
+.pform label{display:grid;gap:8px;font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft)}
+.pform label small{font-weight:600;letter-spacing:.06em;text-transform:none;color:rgba(255,255,255,.5);font-size:.72rem}
+.pform input,.pform textarea{width:100%;font:500 1rem/1.5 var(--sans);color:var(--white);background:rgba(3,14,31,.55);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 15px;outline:none;transition:border-color .3s, background .3s;letter-spacing:normal;text-transform:none}
+.pform textarea{min-height:140px;resize:vertical}
+.pform input::placeholder,.pform textarea::placeholder{color:rgba(255,255,255,.35)}
+.pform input:focus,.pform textarea:focus{border-color:var(--gold);background:rgba(3,14,31,.8)}
+.pform .row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.pform .btn{justify-self:start;border:0;margin-top:4px}
+.pform .btn[disabled]{opacity:.6;cursor:wait}
+.pform-note{font-size:.8rem;color:rgba(255,255,255,.55);line-height:1.5}
+.pform-msg{display:none;padding:14px 16px;border-radius:12px;font-size:.92rem;line-height:1.5}
+.pform-msg.ok{display:block;background:rgba(201,171,116,.14);border:1px solid rgba(201,171,116,.45);color:var(--gold-soft)}
+.pform-msg.err{display:block;background:rgba(220,90,90,.12);border:1px solid rgba(220,90,90,.45);color:#f3c2c2}
+.hp{position:absolute!important;left:-9999px!important}
+@media (max-width:900px){.prayer .wrap{grid-template-columns:1fr}}
+@media (max-width:560px){.pform .row2{grid-template-columns:1fr}.pform .btn{width:100%}}
+
 /* Contato */
 .contact{display:grid;grid-template-columns:1fr 1.3fr;gap:clamp(32px,6vw,80px);align-items:center}
 .channels{display:grid;grid-template-columns:1fr;gap:14px}
@@ -554,6 +580,7 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
       <li><a href="#sobre">Sobre <small>02</small></a></li>
       <li><a href="#pastores">Pastores <small>03</small></a></li>
       <li><a href="#localizacao">Localização <small>04</small></a></li>
+      <li><a href="#oracao">Oração <small>✦</small></a></li>
       <li><a href="#contato">Contato <small>05</small></a></li>
     </ul>
     <div class="drawer-foot">
@@ -785,6 +812,39 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
   </div>
 </section>
 
+<!-- ═════════ PEDIDO DE ORAÇÃO ═════════
+     Os pedidos chegam no e-mail definido em CONFIG.emailPedidos (serviço gratuito FormSubmit).
+     No 1º envio, chega um e-mail de ativação nesse endereço: é só clicar em "Activate Form". -->
+<section class="section prayer" id="oracao">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-head">
+        <span class="eyebrow">Pedido de oração</span>
+        <h2>Podemos orar por você?</h2>
+        <p class="lead">Compartilhe seu pedido. Ele chega direto aos nossos pastores e será tratado com todo o cuidado e sigilo.</p>
+      </div>
+      <p class="prayer-verse">“Confessai as vossas culpas uns aos outros e orai uns pelos outros, para que sareis.”<cite>Tiago 5:16</cite></p>
+    </div>
+    <form class="pform reveal d1" id="prayerForm" novalidate>
+      <div class="row2">
+        <label for="pNome">Seu nome <small>(opcional)</small>
+          <input id="pNome" name="nome" type="text" autocomplete="name" placeholder="Ex: Maria">
+        </label>
+        <label for="pContato">WhatsApp ou e-mail <small>(opcional)</small>
+          <input id="pContato" name="contato" type="text" placeholder="Se quiser retorno">
+        </label>
+      </div>
+      <label for="pPedido">Seu pedido
+        <textarea id="pPedido" name="pedido" required placeholder="Escreva aqui pelo que você gostaria que orássemos"></textarea>
+      </label>
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="pform-msg" id="prayerMsg" role="status" aria-live="polite"></div>
+      <button class="btn btn-gold" type="submit" id="prayerBtn">Enviar pedido</button>
+      <p class="pform-note">Se não quiser se identificar, pode deixar nome e contato em branco.</p>
+    </form>
+  </div>
+</section>
+
 <!-- ═════════ 8. CONTATO ═════════ -->
 <section class="section ivory" id="contato">
   <div class="wrap contact">
@@ -819,6 +879,7 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
           <li><a href="#sobre">Sobre</a></li>
           <li><a href="#pastores">Pastores</a></li>
           <li><a href="#localizacao">Localização</a></li>
+          <li><a href="#oracao">Pedido de oração</a></li>
           <li><a href="#contato">Contato</a></li>
         </ul>
       </div>
@@ -852,6 +913,7 @@ const CONFIG = {
   instagram: "https://www.instagram.com/adbrasitapevisantanaalphaville",
   instagramUser: "@adbrasitapevisantanaalphaville",
   email:     "adbrassantanaalphaville@gmail.com",
+  emailPedidos: "adbrassantanaalphaville@gmail.com",   // onde chegam os pedidos de oração
   facebook:  "",   // ex: "https://facebook.com/suaigreja"
   youtube:   "",   // ex: "https://youtube.com/@suaigreja"
   whatsapp:  "",   // só números com DDI+DDD, ex: "5511999999999"
@@ -974,6 +1036,32 @@ const CONFIG = {
       $('#notice').classList.remove('show'); document.body.classList.remove('has-notice');
 
       try { sessionStorage.setItem(key, '1'); } catch (e) {}
+    });
+  })();
+
+  /* Pedido de oração (envio pelo FormSubmit, sem servidor) */
+  (function(){
+    const f = $('#prayerForm'); if (!f) return;
+    const msg = $('#prayerMsg'), btn = $('#prayerBtn');
+    const show = (t, ok) => { msg.textContent = t; msg.className = 'pform-msg ' + (ok ? 'ok' : 'err'); };
+    f.addEventListener('submit', async e => {
+      e.preventDefault();
+      const pedido = f.pedido.value.trim();
+      if (pedido.length < 3) { show('Escreva seu pedido antes de enviar.', false); f.pedido.focus(); return; }
+      if (f._honey.value) return;
+      btn.disabled = true; btn.textContent = 'Enviando…';
+      try {
+        const r = await fetch('https://formsubmit.co/ajax/' + CONFIG.emailPedidos, {
+          method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({ _subject: 'Novo pedido de oração pelo site', _template: 'table',
+            Nome: f.nome.value.trim() || 'Não informado', Contato: f.contato.value.trim() || 'Não informado', Pedido: pedido })
+        });
+        const d = await r.json().catch(() => ({}));
+        if (!r.ok || d.success === 'false' || d.success === false) throw new Error();
+        f.reset(); show('Recebemos seu pedido. Nossos pastores vão orar por você. Deus abençoe!', true);
+      } catch (err) {
+        show('Não foi possível enviar agora. Tente de novo em instantes ou mande pelo e-mail ' + CONFIG.emailPedidos + '.', false);
+      } finally { btn.disabled = false; btn.textContent = 'Enviar pedido'; }
     });
   })();
 
