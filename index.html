@@ -65,7 +65,7 @@
 }
 
 *{box-sizing:border-box}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#061a33}
 body{
   margin:0;background:var(--navy-900);color:var(--ink);
   font-family:var(--sans);font-size:16px;line-height:1.7;
@@ -970,8 +970,16 @@ const CONFIG = {
       $('#noticeLink').addEventListener('click', e => { e.preventDefault(); window.__openPoster(top.cartaz, top.titulo); });
     }
     $('#notice').classList.add('show'); document.body.classList.add('has-notice');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+    if (themeMeta) themeMeta.setAttribute('content', '#c9ab74');
     $('#noticeClose').addEventListener('click', () => {
       $('#notice').classList.remove('show'); document.body.classList.remove('has-notice');
+      /* Faz a barra do celular (iPhone/Android) voltar pro azul depois de fechar o aviso */
+      if (themeMeta) themeMeta.setAttribute('content', '#061a33');
+      const y = window.scrollY;
+      document.documentElement.style.scrollBehavior = 'auto';
+      window.scrollTo(0, y + 1);
+      requestAnimationFrame(() => { window.scrollTo(0, y); document.documentElement.style.scrollBehavior = ''; });
       try { sessionStorage.setItem(key, '1'); } catch (e) {}
     });
   })();
