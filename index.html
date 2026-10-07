@@ -65,10 +65,11 @@
 }
 
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:#061a33}
 body{
   margin:0;background:var(--navy-900);color:var(--ink);
-  font-family:var(--sans);font-size:16px;line-height:1.7;
+  font-family:var(--sans);font-size:1rem;line-height:1.7;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
 img{max-width:100%;display:block}
@@ -402,6 +403,46 @@ body.poster-open{overflow:hidden}
 .invite h2 em{color:var(--gold-soft)}
 .invite p{color:rgba(255,255,255,.74);font-size:1.08rem;max-width:52ch}
 
+/* ───────── Acessibilidade ───────── */
+html.a11y-t1{font-size:112.5%}
+html.a11y-t2{font-size:125%}
+html.a11y-calm *,html.a11y-calm *::before,html.a11y-calm *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+html.a11y-hc .hero-bg,html.a11y-hc .hero::before,html.a11y-hc .leaders::before,html.a11y-hc .invite::before,html.a11y-hc .prayer::before{display:none!important}
+html.a11y-hc body,html.a11y-hc section,html.a11y-hc footer,html.a11y-hc .header,html.a11y-hc .notice,html.a11y-hc .drawer-panel,html.a11y-hc .event,html.a11y-hc .pillar,html.a11y-hc .channel,html.a11y-hc .pform,html.a11y-hc .pform input,html.a11y-hc .pform textarea{background:#000!important;color:#fff!important;border-color:#fff!important}
+html.a11y-hc *{color:#fff!important;text-shadow:none!important}
+html.a11y-hc .eyebrow,html.a11y-hc .role,html.a11y-hc a,html.a11y-hc em,html.a11y-hc cite,html.a11y-hc .hero-time b,html.a11y-hc .event-meta{color:#ffe600!important}
+html.a11y-hc .btn,html.a11y-hc .btn *{background:#ffe600!important;color:#000!important;border:2px solid #ffe600!important}
+html.a11y-hc .btn-ghost,html.a11y-hc .btn-ghost *,html.a11y-hc .copy-btn{background:#000!important;color:#ffe600!important}
+html.a11y-hc .a11y-panel,html.a11y-hc .a11y-panel *{background:#000!important;color:#fff!important;border-color:#fff!important}
+
+.a11y-btn{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:52px;height:52px;border-radius:50%;border:2px solid rgba(201,171,116,.7);background:var(--navy-900);color:var(--gold-soft);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
+.a11y-btn:hover{transform:scale(1.06)}
+.a11y-btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.a11y-btn svg{width:26px;height:26px}
+.a11y-panel{position:fixed;left:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:71;width:min(300px,calc(100vw - 32px));background:var(--navy-950);color:var(--white);border:1px solid rgba(201,171,116,.4);border-radius:18px;padding:18px;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);display:grid;gap:14px}
+.a11y-panel h2{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.a11y-row{display:grid;gap:8px}
+.a11y-row > span{font-size:.85rem;color:rgba(255,255,255,.75)}
+.a11y-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.a11y-opt{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;padding:10px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.18);font-weight:700;font-size:.85rem;color:var(--white)}
+.a11y-opt[aria-pressed="true"]{background:var(--gold);color:var(--navy-950);border-color:var(--gold)}
+.a11y-opt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.a11y-toggle{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.a11y-reset{all:unset;cursor:pointer;font-size:.78rem;color:var(--gold-soft);text-decoration:underline;justify-self:start}
+
+/* Primeira visita */
+.visit-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px}
+.visit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light)}
+.visit-item{display:grid;grid-template-rows:auto auto;align-content:start;gap:18px;padding:32px 26px 34px}
+.visit-item:first-child{padding-left:0}
+.visit-item+.visit-item{border-left:1px solid var(--line-light)}
+.visit-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--navy-900);color:var(--gold-soft)}
+.visit-icon svg{width:20px;height:20px}
+.visit-item h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;line-height:1.15;color:var(--ink)}
+.visit-item p{margin-top:8px;color:var(--ink-soft);font-size:.96rem;line-height:1.6}
+@media (max-width:1000px){.visit-grid{grid-template-columns:1fr 1fr;border-bottom:0}.visit-item{padding:28px 24px 30px;border-bottom:1px solid var(--line-light)}.visit-item:nth-child(odd){padding-left:0;border-left:0}.visit-item:nth-child(even){border-left:1px solid var(--line-light)}}
+@media (max-width:560px){.visit-grid{grid-template-columns:1fr}.visit-item,.visit-item:nth-child(even){grid-template-columns:44px 1fr;grid-template-rows:auto;padding:24px 0;border-left:0}}
+
 /* Localização */
 .loc{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(36px,6vw,80px);align-items:stretch}
 .loc-info{display:grid;gap:28px;align-content:center}
@@ -511,7 +552,7 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
   .map{min-height:360px}
 }
 @media (max-width: 560px){
-  body{font-size:15.5px}
+  body{font-size:.97rem}
   .nav{height:74px}
   .brand img{height:42px}
   .hero{padding-bottom:110px}
@@ -779,6 +820,25 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
   </div>
 </section>
 
+<!-- ═════════ PRIMEIRA VISITA ═════════ -->
+<section class="section ivory" id="primeira-visita">
+  <div class="wrap">
+    <div class="visit-head reveal">
+      <div class="section-head">
+        <span class="eyebrow">Primeira visita?</span>
+        <h2>O que você precisa saber</h2>
+      </div>
+      <p class="lead" style="max-width:40ch">Algumas respostas rápidas para você chegar tranquilo no seu primeiro culto com a gente.</p>
+    </div>
+    <div class="visit-grid reveal d1">
+      <div class="visit-item"><span class="visit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 16V11l2-5h10l2 5v5"/><path d="M3 16h18v3H3z"/><circle cx="7.5" cy="16" r="1.4"/><circle cx="16.5" cy="16" r="1.4"/><path d="M5 11h14"/></svg></span><div><h3>Estacionamento</h3><p>Tem bastante espaço para estacionar bem pertinho da igreja.</p></div></div>
+      <div class="visit-item"><span class="visit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="6" r="2.5"/><path d="M12 9.5v6M8 12l4-2 4 2M9.5 21l2.5-5.5 2.5 5.5"/></svg></span><div><h3>Crianças</h3><p>Temos uma salinha com culto e atividades especiais para os pequenos.</p></div></div>
+      <div class="visit-item"><span class="visit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg></span><div><h3>Duração</h3><p>Nossos cultos duram em média 1h30, com louvor, oração e a Palavra de Deus.</p></div></div>
+      <div class="visit-item"><span class="visit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg></span><div><h3>Acolhimento</h3><p>Você vai ser recebido com muito carinho. Sinta-se em casa!</p></div></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═════════ 7. LOCALIZAÇÃO ═════════ -->
 <section class="section light" id="localizacao">
   <div class="wrap loc">
@@ -896,6 +956,30 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
   <img id="posterImg" alt="">
 </div>
 
+<!-- ═════════ ACESSIBILIDADE ═════════ -->
+<button class="a11y-btn" id="a11yBtn" type="button" aria-label="Opções de acessibilidade" aria-expanded="false" aria-controls="a11yPanel">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.2" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M12 14.5 9 21M12 14.5l3 6.5"/></svg>
+</button>
+<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Acessibilidade" hidden>
+  <h2>Acessibilidade</h2>
+  <div class="a11y-row"><span>Tamanho do texto</span>
+    <div class="a11y-seg" role="group" aria-label="Tamanho do texto">
+      <button class="a11y-opt" type="button" data-size="0" aria-pressed="true">A</button>
+      <button class="a11y-opt" type="button" data-size="1" aria-pressed="false" style="font-size:1rem">A+</button>
+      <button class="a11y-opt" type="button" data-size="2" aria-pressed="false" style="font-size:1.15rem">A++</button>
+    </div>
+  </div>
+  <div class="a11y-toggle"><span>Alto contraste</span><button class="a11y-opt" type="button" id="a11yHc" aria-pressed="false" style="width:72px">Ligar</button></div>
+  <div class="a11y-toggle"><span>Parar animações</span><button class="a11y-opt" type="button" id="a11yCalm" aria-pressed="false" style="width:72px">Ligar</button></div>
+  <button class="a11y-reset" type="button" id="a11yReset">Voltar ao padrão</button>
+</div>
+
+<!-- VLibras: tradução para Libras (ferramenta oficial e gratuita do Governo Federal) -->
+<div vw class="enabled">
+  <div vw-access-button class="active"></div>
+  <div vw-plugin-wrapper><div class="vw-plugin-top-wrapper"></div></div>
+</div>
+
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -913,7 +997,7 @@ const CONFIG = {
   instagram: "https://www.instagram.com/adbrasitapevisantanaalphaville",
   instagramUser: "@adbrasitapevisantanaalphaville",
   email:     "adbrassantanaalphaville@gmail.com",
-  emailPedidos: "adbrassantanaalphaville@gmail.com",   // onde chegam os pedidos de oração
+  emailPedidos: "kakafersoa@gmail.com",   // TESTE: trocar de volta para "adbrassantanaalphaville@gmail.com"
   facebook:  "",   // ex: "https://facebook.com/suaigreja"
   youtube:   "",   // ex: "https://youtube.com/@suaigreja"
   whatsapp:  "",   // só números com DDI+DDD, ex: "5511999999999"
@@ -1089,7 +1173,7 @@ const CONFIG = {
       items[cur].classList.add('on'); items[cur].setAttribute('aria-hidden','false');
     };
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => show((cur + 1) % V.length, false), (CONFIG.tempoVersiculo || 7) * 1000); };
+    const start = () => { if (reduce) return; clearInterval(timer); timer = setInterval(() => { if (document.documentElement.classList.contains('a11y-calm')) return; show((cur + 1) % V.length, false); }, (CONFIG.tempoVersiculo || 7) * 1000); };
     const next = () => { show((cur + 1) % V.length, false); start(); };
     const prev = () => { show((cur - 1 + V.length) % V.length, true); start(); };
     /* Deslizar com o dedo (ou arrastar com o mouse) */
@@ -1229,6 +1313,33 @@ const CONFIG = {
   });
 
   /* Esconde o "carregando" quando o mapa carrega */
+})();
+</script>
+
+<script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+<script>try { new window.VLibras.Widget('https://vlibras.gov.br/app'); } catch (e) {}</script>
+<script>
+/* Acessibilidade: tamanho do texto, alto contraste e parar animações (fica salvo no aparelho) */
+(function(){
+  const root = document.documentElement, btn = document.getElementById('a11yBtn'), panel = document.getElementById('a11yPanel');
+  let st = { size: 0, hc: false, calm: false };
+  try { st = Object.assign(st, JSON.parse(localStorage.getItem('a11y') || '{}')); } catch (e) {}
+  const apply = () => {
+    root.classList.toggle('a11y-t1', st.size === 1); root.classList.toggle('a11y-t2', st.size === 2);
+    root.classList.toggle('a11y-hc', !!st.hc); root.classList.toggle('a11y-calm', !!st.calm);
+    panel.querySelectorAll('[data-size]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.size === st.size)));
+    [['a11yHc','hc'],['a11yCalm','calm']].forEach(([id,k]) => { const b = document.getElementById(id); b.setAttribute('aria-pressed', String(!!st[k])); b.textContent = st[k] ? 'Ligado' : 'Ligar'; });
+    try { localStorage.setItem('a11y', JSON.stringify(st)); } catch (e) {}
+  };
+  const toggle = open => { panel.hidden = !open; btn.setAttribute('aria-expanded', String(open)); };
+  btn.addEventListener('click', () => toggle(panel.hidden));
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) toggle(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { toggle(false); btn.focus(); } });
+  panel.querySelectorAll('[data-size]').forEach(b => b.addEventListener('click', () => { st.size = +b.dataset.size; apply(); }));
+  document.getElementById('a11yHc').addEventListener('click', () => { st.hc = !st.hc; apply(); });
+  document.getElementById('a11yCalm').addEventListener('click', () => { st.calm = !st.calm; apply(); });
+  document.getElementById('a11yReset').addEventListener('click', () => { st = { size: 0, hc: false, calm: false }; apply(); });
+  apply();
 })();
 </script>
 </body>
