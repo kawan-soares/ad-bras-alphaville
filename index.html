@@ -425,23 +425,69 @@ html.a11y-hc .pform input::placeholder,html.a11y-hc .pform textarea::placeholder
 html.a11y-hc .btn-ghost{border-color:#fff!important}
 html.a11y-hc a:focus-visible,html.a11y-hc button:focus-visible{outline:3px solid #fbe9c2!important;outline-offset:3px}
 
-.a11y-btn{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:52px;height:52px;border-radius:50%;border:2px solid rgba(201,171,116,.7);background:var(--navy-900);color:var(--gold-soft);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
+.a11y-btn{position:fixed;left:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:70;width:54px;height:54px;border-radius:50%;border:2px solid rgba(201,171,116,.75);background:var(--navy-900);color:var(--gold-soft);display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 24px -10px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
 .a11y-btn:hover{transform:scale(1.06)}
 .a11y-btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
-.a11y-btn svg{width:26px;height:26px}
-.a11y-panel{position:fixed;left:16px;bottom:calc(80px + env(safe-area-inset-bottom,0px));z-index:71;width:min(300px,calc(100vw - 32px));background:var(--navy-950);color:var(--white);border:1px solid rgba(201,171,116,.4);border-radius:18px;padding:18px;box-shadow:0 24px 50px -20px rgba(0,0,0,.7);display:grid;gap:14px}
-.a11y-panel h2{font-family:var(--sans);font-size:.72rem;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.a11y-row{display:grid;gap:8px}
-.a11y-row > span{font-size:.85rem;color:rgba(255,255,255,.75)}
-.a11y-seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
-.a11y-opt{all:unset;box-sizing:border-box;cursor:pointer;text-align:center;padding:10px 6px;border-radius:10px;border:1px solid rgba(255,255,255,.18);font-weight:700;font-size:.85rem;color:var(--white)}
-.a11y-opt[aria-pressed="true"]{background:var(--gold);color:var(--navy-950);border-color:var(--gold)}
-.a11y-opt:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.a11y-toggle{display:flex;justify-content:space-between;align-items:center;gap:12px}
-.vl-close{position:fixed;right:16px;top:calc(16px + env(safe-area-inset-top,0px));z-index:2147483647;display:flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;border:0;background:#003f86;color:#fff;font:700 .8rem/1 var(--sans);box-shadow:0 8px 20px rgba(0,0,0,.35);cursor:pointer}
-.vl-close svg{width:16px;height:16px}
-.vl-close:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-.a11y-reset{all:unset;cursor:pointer;font-size:.78rem;color:var(--gold-soft);text-decoration:underline;justify-self:start}
+.a11y-btn svg{width:28px;height:28px}
+[vw-access-button]{display:none!important}
+
+.ax{position:fixed;left:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:2147483000;width:min(400px,calc(100vw - 32px));max-height:min(640px,calc(100dvh - 120px));display:flex;flex-direction:column;background:#f6f3ec;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);font-family:var(--sans);color:#0c1b30;font-size:16px;line-height:1.4;letter-spacing:normal;word-spacing:normal}
+html body .ax *{font-family:var(--sans)!important;letter-spacing:normal!important;word-spacing:normal!important;line-height:1.3!important}
+.ax-head{display:flex;align-items:center;gap:10px;padding:16px 16px 16px 20px;background:linear-gradient(120deg,#030e1f,#123463);color:#fff;border-bottom:2px solid #c9ab74}
+.ax-head h2{flex:1;font-size:1.05em;font-weight:700;letter-spacing:.02em!important;color:#fff}
+.ax-icobtn{all:unset;box-sizing:border-box;cursor:pointer;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;border:1px solid rgba(255,255,255,.3)}
+.ax-icobtn:hover{background:rgba(255,255,255,.12)}
+.ax-icobtn:focus-visible{outline:3px solid #c9ab74;outline-offset:2px}
+.ax-icobtn svg{width:18px;height:18px}
+.ax-body{overflow-y:auto;padding:16px;display:grid;gap:12px;-webkit-overflow-scrolling:touch}
+.ax-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ax-grid.three{grid-template-columns:repeat(3,1fr);gap:10px}
+.ax-tile{all:unset;box-sizing:border-box;cursor:pointer;display:grid;justify-items:center;align-content:center;gap:10px;text-align:center;min-height:118px;padding:16px 10px;background:#fff;border:1px solid #e3ddd0;border-radius:16px;font-size:.92em;font-weight:600;color:#0c1b30;box-shadow:0 6px 16px -12px rgba(6,26,51,.4);transition:border-color .25s, transform .25s}
+.ax-grid.three .ax-tile{min-height:104px;font-size:.8em;padding:12px 6px;gap:8px}
+.ax-tile:hover{border-color:#c9ab74;transform:translateY(-2px)}
+.ax-tile:focus-visible{outline:3px solid #c9ab74;outline-offset:2px}
+.ax-tile svg{width:38px;height:38px;color:#123463}
+.ax-grid.three .ax-tile svg{width:30px;height:30px}
+.ax-tile[aria-pressed="true"],.ax-tile.on{background:#061a33;border-color:#061a33;color:#fff}
+.ax-tile[aria-pressed="true"] svg,.ax-tile.on svg{color:#e4d2ad}
+.ax-lv{display:flex;gap:4px;justify-content:center;height:4px}
+.ax-lv i{width:18px;height:4px;border-radius:2px;background:#d9d1c0}
+.ax-tile.on .ax-lv i{background:rgba(255,255,255,.25)}
+.ax-tile.on .ax-lv i.f{background:#c9ab74}
+.ax-sec{font-size:.7em;font-weight:700;letter-spacing:.18em!important;text-transform:uppercase;color:#6a4c12;margin:6px 2px 0}
+.ax-reset{all:unset;cursor:pointer;justify-self:center;display:flex;align-items:center;gap:8px;margin:6px 0 4px;padding:12px 22px;border-radius:999px;background:#061a33;color:#fff;font-weight:700;font-size:.85em}
+.ax-reset:focus-visible{outline:3px solid #c9ab74;outline-offset:2px}
+.ax-reset svg{width:16px;height:16px}
+.ax-about{font-size:.92em;line-height:1.6!important;color:#2b3a4e;display:grid;gap:10px}
+.ax-about b{color:#0c1b30}
+.ax-note{font-size:.78em;color:#4a5a70;text-align:center}
+@media (max-width:560px){
+  .ax{left:10px;right:10px;width:auto;bottom:calc(78px + env(safe-area-inset-bottom,0px));max-height:calc(100dvh - 110px)}
+  .ax-grid.three{grid-template-columns:1fr 1fr}
+}
+
+/* Ferramentas */
+html.a11y-t3{font-size:140%}
+html.ax-sat-1{filter:saturate(.45)}
+html.ax-sat-2{filter:grayscale(1)}
+html.ax-sat-3{filter:saturate(1.7)}
+html.ax-inv{filter:invert(1) hue-rotate(180deg)}
+html.ax-inv img,html.ax-inv .hero-bg,html.ax-inv iframe,html.ax-inv .g-item{filter:invert(1) hue-rotate(180deg)}
+html.ax-links a,html.ax-links button:not(.ax-tile):not(.ax-icobtn):not(.ax-reset){text-decoration:underline!important;text-underline-offset:3px;outline:2px dashed #c9ab74!important;outline-offset:3px}
+html.ax-titles h1,html.ax-titles h2,html.ax-titles h3{background:rgba(201,171,116,.28);box-shadow:0 0 0 6px rgba(201,171,116,.28);border-radius:4px}
+html.ax-font body *:not(svg):not(svg *){font-family:"Atkinson Hyperlegible",Verdana,Arial,sans-serif!important;font-style:normal!important}
+html.ax-sp-1 body *{letter-spacing:.06em!important;word-spacing:.14em!important}
+html.ax-sp-2 body *{letter-spacing:.12em!important;word-spacing:.28em!important}
+html.ax-lh-1 p,html.ax-lh-1 li,html.ax-lh-1 blockquote,html.ax-lh-1 .lead{line-height:2!important}
+html.ax-lh-2 p,html.ax-lh-2 li,html.ax-lh-2 blockquote,html.ax-lh-2 .lead{line-height:2.4!important}
+html.ax-left .hero,html.ax-left .hero *,html.ax-left section,html.ax-left section *{text-align:left!important}
+html.ax-noimg img:not(.brand img):not(.ax img),html.ax-noimg .hero-bg,html.ax-noimg .g-item{visibility:hidden!important}
+html.ax-cursor,html.ax-cursor *{cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='44' viewBox='0 0 24 24'%3E%3Cpath d='M4 2l15 11-7 1 4 8-3 1-4-8-5 5z' fill='%23061a33' stroke='%23fff' stroke-width='1.4' stroke-linejoin='round'/%3E%3C/svg%3E") 4 2,auto!important}
+.ax-guide{position:fixed;left:0;right:0;height:6px;margin-top:-3px;background:#c9ab74;box-shadow:0 0 0 2px #061a33;z-index:2147482000;pointer-events:none;display:none}
+.ax-mask{position:fixed;left:0;right:0;background:rgba(3,14,31,.72);z-index:2147482000;pointer-events:none;display:none}
+html.ax-guide-on .ax-guide,html.ax-mask-on .ax-mask{display:block}
+.ax-reading{outline:3px solid #c9ab74!important;outline-offset:4px;background:rgba(201,171,116,.18)!important;border-radius:6px}
+html.ax-speak main *:hover{cursor:pointer}
 
 /* Primeira visita */
 .visit-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:end;gap:20px}
@@ -971,21 +1017,39 @@ a.channel:hover .ch-go{transform:translate(3px,-3px);color:var(--gold)}
 
 <!-- ═════════ ACESSIBILIDADE ═════════ -->
 <button class="a11y-btn" id="a11yBtn" type="button" aria-label="Opções de acessibilidade" aria-expanded="false" aria-controls="a11yPanel">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.2" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M12 14.5 9 21M12 14.5l3 6.5"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="6.6" r="1.4"/><path d="M6.5 9.2l5.5 1.2 5.5-1.2M12 10.4v3.6M12 14l-2.4 4.4M12 14l2.4 4.4"/></svg>
 </button>
-<div class="a11y-panel" id="a11yPanel" role="dialog" aria-label="Acessibilidade" hidden>
-  <h2>Acessibilidade</h2>
-  <div class="a11y-row"><span>Tamanho do texto</span>
-    <div class="a11y-seg" role="group" aria-label="Tamanho do texto">
-      <button class="a11y-opt" type="button" data-size="0" aria-pressed="true">A</button>
-      <button class="a11y-opt" type="button" data-size="1" aria-pressed="false" style="font-size:1rem">A+</button>
-      <button class="a11y-opt" type="button" data-size="2" aria-pressed="false" style="font-size:1.15rem">A++</button>
+<div class="ax" id="a11yPanel" role="dialog" aria-modal="false" aria-labelledby="axTitle" hidden>
+  <div class="ax-head">
+    <button class="ax-icobtn" type="button" id="axBack" aria-label="Voltar" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
+    <h2 id="axTitle">Acessibilidade</h2>
+    <button class="ax-icobtn" type="button" id="axClose" aria-label="Fechar acessibilidade"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="ax-body" id="axHome">
+    <div class="ax-grid">
+      <button class="ax-tile" type="button" id="axLibras"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 11V6a1.5 1.5 0 0 1 3 0v4M10 10V4.5a1.5 1.5 0 0 1 3 0V10M13 10V5.5a1.5 1.5 0 0 1 3 0V12M16 9a1.5 1.5 0 0 1 3 0v4a7 7 0 0 1-7 7h-1a6 6 0 0 1-5-3l-2.3-3.7a1.5 1.5 0 0 1 2.5-1.7L7 14"/></svg><span>Libras</span></button>
+      <button class="ax-tile" type="button" data-tog="speak" id="axSpeak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg><span>Ouvir o site</span></button>
+      <button class="ax-tile" type="button" id="axTools"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/><circle cx="12" cy="10" r="3"/><path d="M12 7v6"/></svg><span>Mais ferramentas</span></button>
+      <button class="ax-tile" type="button" id="axAbout"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg><span>Sobre</span></button>
+    </div>
+    <button class="ax-reset" type="button" data-reset><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg>Redefinir tudo</button>
+  </div>
+  <div class="ax-body" id="axToolsView" hidden>
+    <p class="ax-sec">Leitura</p><div class="ax-grid three"><button class="ax-tile" type="button" data-lvl="size" data-max="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19l5-13 5 13M4.8 14.5h6.4M14 19l3.5-9 3.5 9M15.2 16h4.6"/></svg><span>Tamanho do texto</span><span class="ax-lv"><i></i><i></i><i></i></span></button><button class="ax-tile" type="button" data-tog="font"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19 8.5 6h1L14 19M5.5 15h7"/><path d="M15 12.5a2.5 2.5 0 1 1 0 5h0a2.5 2.5 0 0 1 0-5zM17.5 11v8"/></svg><span>Fonte legível</span></button><button class="ax-tile" type="button" data-lvl="sp" data-max="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h4M6 7v10M16 7h4M18 7v10"/><path d="M9 12h6M13 10l2 2-2 2M11 10l-2 2 2 2"/></svg><span>Espaçamento</span><span class="ax-lv"><i></i><i></i></span></button><button class="ax-tile" type="button" data-lvl="lh" data-max="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 6h10M11 12h10M11 18h10M5 4v16M3 6l2-2 2 2M3 18l2 2 2-2"/></svg><span>Altura de linha</span><span class="ax-lv"><i></i><i></i></span></button><button class="ax-tile" type="button" data-tog="left"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 10h10M4 14h16M4 18h10"/></svg><span>Alinhar à esquerda</span></button><button class="ax-tile" type="button" data-tog="titles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9v6M11 9v6M7 12h4M15 10l1.5-1v6"/></svg><span>Destacar títulos</span></button></div><p class="ax-sec">Cores</p><div class="ax-grid three"><button class="ax-tile" type="button" data-tog="hc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 3v18a9 9 0 0 0 0-18z" fill="currentColor"/></svg><span>Alto contraste</span></button><button class="ax-tile" type="button" data-tog="inv"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 21 21 3"/><path d="M21 3v18H3z" fill="currentColor"/></svg><span>Contraste invertido</span></button><button class="ax-tile" type="button" data-lvl="sat" data-max="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg><span>Saturação</span><span class="ax-lv"><i></i><i></i><i></i></span></button></div><p class="ax-sec">Navegação</p><div class="ax-grid three"><button class="ax-tile" type="button" data-tog="links"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg><span>Destacar links</span></button><button class="ax-tile" type="button" data-tog="guide"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12h18"/><path d="M8 7h8M8 17h8" opacity=".45"/><path d="M12 9l-2 3h4z" fill="currentColor"/></svg><span>Guia de leitura</span></button><button class="ax-tile" type="button" data-tog="mask"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" fill="currentColor" opacity=".35"/><rect x="3" y="15" width="18" height="5" fill="currentColor" opacity=".35"/><path d="M3 12h18"/></svg><span>Máscara de leitura</span></button><button class="ax-tile" type="button" data-tog="cursor"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 3l13 9.5-6 1 3.5 7-2.5 1.2-3.5-7L5 19z"/></svg><span>Cursor grande</span></button><button class="ax-tile" type="button" data-tog="calm"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 9v6M14 9v6"/></svg><span>Pausar animações</span></button><button class="ax-tile" type="button" data-tog="noimg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 16 5-5 4 4 3-3 6 6"/><path d="M3 3l18 18"/></svg><span>Ocultar imagens</span></button></div>
+    <button class="ax-reset" type="button" data-reset><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7L4 8.5"/><path d="M4 4v4.5h4.5"/></svg>Redefinir tudo</button>
+  </div>
+  <div class="ax-body" id="axAboutView" hidden>
+    <div class="ax-about">
+      <p>Queremos que <b>todos</b> possam conhecer nossa igreja. Estas ferramentas ajudam pessoas com deficiência visual, auditiva, cognitiva ou motora, e também quem só prefere ler com mais conforto.</p>
+      <p><b>Libras:</b> toque em Libras e depois em qualquer texto do site para ver a tradução em Libras.</p>
+      <p><b>Ouvir o site:</b> ative e toque em qualquer texto para ouvi-lo em voz alta.</p>
+      <p>Suas escolhas ficam salvas neste aparelho.</p>
     </div>
   </div>
-  <div class="a11y-toggle"><span>Alto contraste</span><button class="a11y-opt" type="button" id="a11yHc" aria-pressed="false" style="width:72px">Ligar</button></div>
-  <div class="a11y-toggle"><span>Parar animações</span><button class="a11y-opt" type="button" id="a11yCalm" aria-pressed="false" style="width:72px">Ligar</button></div>
-  <button class="a11y-reset" type="button" id="a11yReset">Voltar ao padrão</button>
+  <p class="ax-note" id="axSpeakNote" hidden style="padding:0 16px 14px">Toque em um texto para ouvir. Toque de novo para parar.</p>
 </div>
+<div class="ax-guide" id="axGuide" aria-hidden="true"></div>
+<div class="ax-mask" id="axMaskTop" aria-hidden="true"></div><div class="ax-mask" id="axMaskBot" aria-hidden="true"></div>
 
 
 <!-- VLibras: tradução para Libras (ferramenta oficial e gratuita do Governo Federal) -->
@@ -1341,26 +1405,85 @@ const CONFIG = {
 </script>
 
 <script>
-/* Acessibilidade: tamanho do texto, alto contraste e parar animações (fica salvo no aparelho) */
+/* ═════════ Painel de acessibilidade (escolhas salvas no aparelho) ═════════ */
 (function(){
-  const root = document.documentElement, btn = document.getElementById('a11yBtn'), panel = document.getElementById('a11yPanel');
-  let st = { size: 0, hc: false, calm: false };
-  try { st = Object.assign(st, JSON.parse(localStorage.getItem('a11y') || '{}')); } catch (e) {}
+  const root = document.documentElement, $ = id => document.getElementById(id);
+  const btn = $('a11yBtn'), panel = $('a11yPanel');
+  const views = { home: $('axHome'), tools: $('axToolsView'), about: $('axAboutView') };
+  const DEF = { size:0, sp:0, lh:0, sat:0, hc:false, inv:false, font:false, left:false, titles:false, links:false, guide:false, mask:false, cursor:false, calm:false, noimg:false, speak:false };
+  let st = Object.assign({}, DEF);
+  try { Object.assign(st, JSON.parse(localStorage.getItem('a11y') || '{}')); } catch (e) {}
+  st.speak = false;
+
+  let fontLoaded = false;
+  const loadFont = () => { if (fontLoaded) return; fontLoaded = true; const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = 'https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap'; document.head.appendChild(l); };
+
   const apply = () => {
-    root.classList.toggle('a11y-t1', st.size === 1); root.classList.toggle('a11y-t2', st.size === 2);
-    root.classList.toggle('a11y-hc', !!st.hc); root.classList.toggle('a11y-calm', !!st.calm);
-    panel.querySelectorAll('[data-size]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.size === st.size)));
-    [['a11yHc','hc'],['a11yCalm','calm']].forEach(([id,k]) => { const b = document.getElementById(id); b.setAttribute('aria-pressed', String(!!st[k])); b.textContent = st[k] ? 'Ligado' : 'Ligar'; });
-    try { localStorage.setItem('a11y', JSON.stringify(st)); } catch (e) {}
+    if (st.hc && st.inv) st.inv = false;
+    ['a11y-t1','a11y-t2','a11y-t3'].forEach((c,i) => root.classList.toggle(c, st.size === i + 1));
+    ['ax-sp-1','ax-sp-2'].forEach((c,i) => root.classList.toggle(c, st.sp === i + 1));
+    ['ax-lh-1','ax-lh-2'].forEach((c,i) => root.classList.toggle(c, st.lh === i + 1));
+    ['ax-sat-1','ax-sat-2','ax-sat-3'].forEach((c,i) => root.classList.toggle(c, st.sat === i + 1 && !st.inv));
+    const map = { hc:'a11y-hc', inv:'ax-inv', font:'ax-font', left:'ax-left', titles:'ax-titles', links:'ax-links', guide:'ax-guide-on', mask:'ax-mask-on', cursor:'ax-cursor', calm:'a11y-calm', noimg:'ax-noimg', speak:'ax-speak' };
+    Object.entries(map).forEach(([k,c]) => root.classList.toggle(c, !!st[k]));
+    if (st.font) loadFont();
+    panel.querySelectorAll('[data-tog]').forEach(t => { const on = !!st[t.dataset.tog]; t.setAttribute('aria-pressed', String(on)); t.classList.toggle('on', on); });
+    panel.querySelectorAll('[data-lvl]').forEach(t => {
+      const v = st[t.dataset.lvl]; t.classList.toggle('on', v > 0); t.setAttribute('aria-pressed', String(v > 0));
+      t.querySelectorAll('.ax-lv i').forEach((i,n) => i.classList.toggle('f', n < v));
+    });
+    $('axSpeakNote').hidden = !st.speak;
+    if (!st.speak) stopSpeak();
+    try { const save = Object.assign({}, st); delete save.speak; localStorage.setItem('a11y', JSON.stringify(save)); } catch (e) {}
   };
-  const toggle = open => { panel.hidden = !open; btn.setAttribute('aria-expanded', String(open)); };
-  btn.addEventListener('click', () => toggle(panel.hidden));
-  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target)) toggle(false); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { toggle(false); btn.focus(); } });
-  panel.querySelectorAll('[data-size]').forEach(b => b.addEventListener('click', () => { st.size = +b.dataset.size; apply(); }));
-  document.getElementById('a11yHc').addEventListener('click', () => { st.hc = !st.hc; apply(); });
-  document.getElementById('a11yCalm').addEventListener('click', () => { st.calm = !st.calm; apply(); });
-  document.getElementById('a11yReset').addEventListener('click', () => { st = { size: 0, hc: false, calm: false }; apply(); });
+
+  /* Abrir/fechar e navegação entre telas */
+  const show = v => { Object.entries(views).forEach(([k,el]) => el.hidden = k !== v); $('axBack').hidden = v === 'home'; $('axTitle').textContent = v === 'tools' ? 'Mais ferramentas' : v === 'about' ? 'Sobre a acessibilidade' : 'Acessibilidade'; };
+  const open = o => { panel.hidden = !o; btn.setAttribute('aria-expanded', String(o)); if (o) { show('home'); $('axClose').focus(); } };
+  btn.addEventListener('click', () => open(panel.hidden));
+  $('axClose').addEventListener('click', () => { open(false); btn.focus(); });
+  $('axBack').addEventListener('click', () => show('home'));
+  $('axTools').addEventListener('click', () => show('tools'));
+  $('axAbout').addEventListener('click', () => show('about'));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !panel.hidden) { open(false); btn.focus(); } });
+  document.addEventListener('click', e => { if (!panel.hidden && !panel.contains(e.target) && !btn.contains(e.target) && !st.speak) open(false); });
+
+  panel.querySelectorAll('[data-tog]').forEach(t => t.addEventListener('click', () => { const k = t.dataset.tog; st[k] = !st[k]; if (k === 'hc' && st.hc) st.inv = false; if (k === 'inv' && st.inv) st.hc = false; apply(); }));
+  panel.querySelectorAll('[data-lvl]').forEach(t => t.addEventListener('click', () => { const k = t.dataset.lvl, m = +t.dataset.max; st[k] = (st[k] + 1) % (m + 1); apply(); }));
+  panel.querySelectorAll('[data-reset]').forEach(b => b.addEventListener('click', () => { st = Object.assign({}, DEF); apply(); }));
+
+  /* Libras: abre o VLibras */
+  $('axLibras').addEventListener('click', () => {
+    const b = document.querySelector('[vw-access-button]');
+    if (b && window.VLibras) { open(false); b.click(); }
+    else { const t = document.getElementById('toast'); t.textContent = 'Tradutor de Libras indisponível no momento.'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+  });
+
+  /* Guia e máscara de leitura acompanham o dedo/mouse */
+  const guide = $('axGuide'), mt = $('axMaskTop'), mb = $('axMaskBot');
+  const move = y => { guide.style.top = y + 'px'; mt.style.top = '0px'; mt.style.height = Math.max(0, y - 60) + 'px'; mb.style.top = (y + 60) + 'px'; mb.style.bottom = '0px'; };
+  move(innerHeight / 2);
+  addEventListener('pointermove', e => { if (st.guide || st.mask) move(e.clientY); }, { passive: true });
+  addEventListener('touchmove', e => { if ((st.guide || st.mask) && e.touches[0]) move(e.touches[0].clientY); }, { passive: true });
+
+  /* Ouvir o site (voz do próprio aparelho) */
+  const synth = window.speechSynthesis; let cur = null;
+  function stopSpeak(){ try { synth && synth.cancel(); } catch (e) {} if (cur) cur.classList.remove('ax-reading'); cur = null; }
+  const pickVoice = () => { const v = synth ? synth.getVoices() : []; return v.find(x => /pt-BR/i.test(x.lang)) || v.find(x => /^pt/i.test(x.lang)); };
+  document.addEventListener('click', e => {
+    if (!st.speak || panel.contains(e.target) || btn.contains(e.target)) return;
+    const el = e.target.closest('p,h1,h2,h3,li,blockquote,figcaption,label,.btn,.who,.role,.hero-time,.event,.name-row,.visit-item,.pillar,.address');
+    if (!el || !synth) return;
+    e.preventDefault(); e.stopPropagation();
+    if (cur === el) { stopSpeak(); return; }
+    stopSpeak();
+    const text = (el.innerText || '').replace(/\s+/g,' ').trim(); if (!text) return;
+    const u = new SpeechSynthesisUtterance(text); u.lang = 'pt-BR'; const v = pickVoice(); if (v) u.voice = v; u.rate = 1;
+    u.onend = u.onerror = () => { if (cur) cur.classList.remove('ax-reading'); cur = null; };
+    cur = el; el.classList.add('ax-reading'); synth.speak(u);
+  }, true);
+  if (!synth) { const t = $('axSpeak'); t.disabled = true; t.style.opacity = .5; }
+
   apply();
 })();
 </script>
