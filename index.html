@@ -429,7 +429,7 @@ html.a11y-hc a:focus-visible,html.a11y-hc button:focus-visible{outline:3px solid
 .a11y-btn:hover{transform:scale(1.06)}
 .a11y-btn:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
 .a11y-btn svg{width:28px;height:28px}
-[vw-access-button]{display:none!important}
+html:not(.ax-vl-show) [vw-access-button]{opacity:0!important;pointer-events:none!important}
 
 .ax{position:fixed;left:16px;bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:2147483000;width:min(400px,calc(100vw - 32px));max-height:min(640px,calc(100dvh - 120px));display:flex;flex-direction:column;background:#f6f3ec;border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.55);font-family:var(--sans);color:#0c1b30;font-size:16px;line-height:1.4;letter-spacing:normal;word-spacing:normal}
 html body .ax *{font-family:var(--sans)!important;letter-spacing:normal!important;word-spacing:normal!important;line-height:1.3!important}
@@ -1455,7 +1455,21 @@ const CONFIG = {
   /* Libras: abre o VLibras */
   $('axLibras').addEventListener('click', () => {
     const b = document.querySelector('[vw-access-button]');
-    if (b && window.VLibras) { open(false); b.click(); }
+    if (b && window.VLibras) {
+      open(false);
+      /* O VLibras coloca o botão de verdade dentro desse elemento: clica nele (e no próprio elemento, por garantia) */
+      const inner = b.querySelector('.access-button, img, [class*="access"]');
+      const fire = el => ['pointerdown','mousedown','pointerup','mouseup','click'].forEach(t => el.dispatchEvent(new MouseEvent(t, { bubbles: true, cancelable: true, view: window })));
+      fire(inner || b);
+      /* Se mesmo assim não abrir, mostra o botão azul do VLibras pra pessoa tocar */
+      setTimeout(() => {
+        const w = document.querySelector('[vw-plugin-wrapper]');
+        if (!(w && w.classList.contains('active'))) {
+          root.classList.add('ax-vl-show');
+          const t = document.getElementById('toast'); t.textContent = 'Toque no botão azul de Libras, à direita da tela.'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3500);
+        }
+      }, 900);
+    }
     else { const t = document.getElementById('toast'); t.textContent = 'Tradutor de Libras indisponível no momento.'; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
   });
 
