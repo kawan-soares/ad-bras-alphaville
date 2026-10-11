@@ -368,6 +368,19 @@ section{scroll-margin-top:60px}
 .event-local a{display:inline-flex;align-items:center;gap:6px;margin-top:8px;color:var(--navy-700);font-weight:700;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;text-decoration:none}
 .event-local a:hover{color:#9a7b45}
 .event-local svg{width:14px;height:14px}
+.event-poster img{aspect-ratio:4/5;object-fit:cover}
+.events:not(.mixed){align-items:start}
+.event-meta{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:28px}
+.event-body > div:nth-child(2){min-width:0}
+.event-more{all:unset;flex:none;box-sizing:border-box;cursor:pointer;width:30px;height:30px;border-radius:50%;border:1px solid var(--line-light);position:relative;transition:background .3s,border-color .3s,transform .4s var(--ease)}
+.event-more:hover{border-color:var(--gold)}
+.event-more:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.event-more span::before,.event-more span::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:1.5px;background:var(--navy-900);transform:translate(-50%,-50%)}
+.event-more span::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .35s var(--ease)}
+.event-more.on{background:var(--navy-900);border-color:var(--navy-900);transform:rotate(180deg)}
+.event-more.on span::before{background:var(--gold)}
+.event-more.on span::after{background:var(--gold);transform:translate(-50%,-50%) rotate(0)}
+.event-extra p{margin-top:10px}
 .events.solo{grid-template-columns:minmax(0,420px)}
 .events.mixed{grid-template-columns:1fr}
 .events-col{display:grid;gap:14px;align-content:start}
@@ -1196,6 +1209,11 @@ const CONFIG = {
     pv.addEventListener('click', e => { if (e.target === pv) closePoster(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePoster(); });
     window.__openPoster = openPoster;
+    document.addEventListener('click', e => {
+      const b = e.target.closest('.event-more'); if (!b) return;
+      const x = b.closest('.event-body').querySelector('.event-extra'); const open = x.hidden;
+      x.hidden = !open; b.setAttribute('aria-expanded', open); b.classList.toggle('on', open);
+    });
     if (!ativos.length) return;
 
     /* Seção + item no menu */
@@ -1206,11 +1224,12 @@ const CONFIG = {
         ? `<button class="event-poster" type="button" data-poster="${a.cartaz}" data-title="${a.titulo}"><img src="${a.cartaz}" alt="Cartaz: ${a.titulo}" loading="lazy"><span>Ver cartaz</span></button>`
         : a.imagem ? `<div class="event-img" style="background-image:url('${a.imagem}')" role="img" aria-label="${a.titulo}"></div>` : '<div></div>';
       const onde = (a.local || a.endereco) ? `<div class="event-local">${a.local ? `<strong>${a.local}</strong><br>` : ''}${a.endereco || ''}${a.endereco ? `<br><a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.endereco)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>Como chegar</a>` : ''}</div>` : '';
+      const extra = a.descricao || onde;
       return `<article class="event">
         ${topo}
         <div class="event-body">
           <div class="event-date"><b>${String(d.getDate()).padStart(2,'0')}</b><small>${MESES[d.getMonth()]}</small></div>
-          <div><h3>${a.titulo}</h3><div class="event-meta">${meta}</div>${a.descricao ? `<p>${a.descricao}</p>` : ''}${onde}</div>
+          <div><h3>${a.titulo}</h3><div class="event-meta"><span>${meta}</span>${extra ? `<button class="event-more" type="button" aria-expanded="false" aria-label="Ver mais sobre ${a.titulo}"><span></span></button>` : ''}</div>${extra ? `<div class="event-extra" hidden>${a.descricao ? `<p>${a.descricao}</p>` : ''}${onde}</div>` : ''}</div>
         </div></article>`;
     };
     const comCartaz = ativos.filter(a => a.cartaz), semCartaz = ativos.filter(a => !a.cartaz);
