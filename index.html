@@ -1151,7 +1151,7 @@ const CONFIG = {
   ],
 
   // AGENDA SEMANAL FIXA — repete toda semana sozinha.
-  //   Domingo 00h a semana "vira" e os 3 cartazes voltam com as datas novas.
+  //   A semana vai de segunda a domingo: segunda 00h os 3 cartazes voltam com as datas novas.
   //   Cada culto some da agenda à meia-noite depois do dia dele.
   //   Se tiver um aviso especial (lá em "avisos") no mesmo dia, o especial aparece no lugar.
   //   dia: 0 = domingo, 1 = segunda, 2 = terça, 3 = quarta, 4 = quinta, 5 = sexta, 6 = sábado
@@ -1192,9 +1192,9 @@ const CONFIG = {
     const iso = d => d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
     const especiais = (CONFIG.avisos || []).filter(a => a && a.titulo && a.data);
     const ocupados = new Set(especiais.map(a => a.data));
-    const domingo = new Date(hoje); domingo.setDate(hoje.getDate() - hoje.getDay());
+    const segunda = new Date(hoje); segunda.setDate(hoje.getDate() - (hoje.getDay() + 6) % 7);   // semana: segunda a domingo
     const semanais = (CONFIG.semana || []).map(c => {
-      const d = new Date(domingo); d.setDate(domingo.getDate() + c.dia);
+      const d = new Date(segunda); d.setDate(segunda.getDate() + (c.dia + 6) % 7);
       return Object.assign({}, c, { data: iso(d) });
     }).filter(c => !ocupados.has(c.data));
     const ativos = especiais.concat(semanais)
